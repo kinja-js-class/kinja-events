@@ -5,10 +5,7 @@ export default class Event extends Component {
     return (
       <li
         onClick={this.props.onClick}
-        style={{
-          textDecoration: this.props.completed ? 'line-through' : 'none',
-          cursor: this.props.completed ? 'default' : 'pointer'
-        }}>
+        className={this.props.completed ? 'completed' : ''}>
         {this.props.text}
       </li>
     )
