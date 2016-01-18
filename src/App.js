@@ -14,18 +14,7 @@ export default class App extends Component {
             dispatch(addEvent(text))
           } />
         <EventStream
-          events={
-            [
-              {
-                text: 'Use Redux',
-                completed: true
-              },
-              {
-                text: 'Learn to connect it to React',
-                completed: false
-              }
-            ]
-          }
+          events={visibleEvents}
           onEventClick={index =>
             dispatch(completeEvent(index))
           } />
