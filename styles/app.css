@@ -1,3 +1,10 @@
+body {
+    font-family: Verdana;
+    font-size: 0.8em;
+}
+.eventstream {
+    float: left;
+}
 li {
   text-decoration: none;
   cursor: pointer;
@@ -6,4 +13,53 @@ li {
 li.completed {
   text-decoration: line-through;
   cursor: default;
+}
+
+
+.timeline {
+    float: left;
+    list-style-type: none;
+    width: 455px;
+    padding: 0;
+    margin: 0;
+}
+.timeline li {
+    min-height: 2em;
+    border-bottom: 1px dotted #ddd;
+}
+.timeline__time {
+    position: absolute;
+    width: 49px;
+    line-height: 2em;
+    height: 2em;
+}
+.timeline__events {
+    display: inline-block;
+    min-height: 2em;
+    border-left: 1px solid #bbb;
+    margin-left: 50px;
+}
+.event {
+    display: inline-block;
+}
+.event__label {
+    padding: 3px 2px 4px;
+    margin-left: 2px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.event__severity-info {
+    background-color: #A3BE8C;
+    border-color: darkgreen;
+}
+.event__severity-alert {
+    background-color: #BF616A;
+    border-color: darkred;
+    color: white;
+}
+
+.event-completed {
+    opacity: 0.6;
+    text-decoration: line-through;
 }

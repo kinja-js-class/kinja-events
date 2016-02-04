@@ -22,16 +22,15 @@ export const VisibilityFilters = {
 
 let nextEventId = 0;
 
-export function addEvent(text) {
+export function addEvent(event) {
   return {
     type: ADD_EVENT,
-    id: nextEventId++,
-    text
+    event
   };
 }
 
-export function completeEvent(id) {
-  return { type: COMPLETE_EVENT, id }
+export function completeEvent(event) {
+  return { type: COMPLETE_EVENT, id: event.id }
 }
 
 export function setVisibilityFilter(filter) {

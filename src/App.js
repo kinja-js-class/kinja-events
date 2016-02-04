@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { addEvent, completeEvent, setVisibilityFilter, VisibilityFilters } from './actions'
 import EventStream from './components/EventStream'
+import EventTimeline from './components/EventTimeline'
 import AddEvent from './components/AddEvent'
 
 export default class App extends Component {
@@ -10,14 +11,15 @@ export default class App extends Component {
     return (
       <div>
         <AddEvent
-          onAddClick={text =>
-            dispatch(addEvent(text))
-          } />
+          onAddClick={event => dispatch(addEvent(event))} />
+        <EventTimeline
+          events={visibleEvents}
+          startHour={9}
+          endHour={19}
+          onEventClick={index => dispatch(completeEvent(index))} />
         <EventStream
           events={visibleEvents}
-          onEventClick={index =>
-            dispatch(completeEvent(index))
-          } />
+          onEventClick={index => dispatch(completeEvent(index))} />
       </div>
     )
   }
@@ -26,7 +28,9 @@ export default class App extends Component {
 App.propTypes = {
   visibleEvents: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired
+    timestamp: PropTypes.number,
+    completed: PropTypes.bool.isRequired,
+    type: PropTypes.string
   }).isRequired).isRequired,
   visibilityFilter: PropTypes.oneOf([
     'SHOW_ALL',

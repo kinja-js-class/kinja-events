@@ -1,4 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import moment from 'moment'
+
+let formatTime = (timestamp) => moment(timestamp, 'X').format('HH:mm')
 
 export default class Event extends Component {
   render() {
@@ -6,7 +9,7 @@ export default class Event extends Component {
       <li
         onClick={this.props.onClick}
         className={this.props.completed ? 'completed' : ''}>
-        {this.props.text}
+        {formatTime(this.props.timestamp)}: {this.props.text}
       </li>
     )
   }
@@ -15,5 +18,6 @@ export default class Event extends Component {
 Event.propTypes = {
   onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
-  completed: PropTypes.bool.isRequired
+  completed: PropTypes.bool.isRequired,
+  timestamp: PropTypes.number.isRequired
 }
