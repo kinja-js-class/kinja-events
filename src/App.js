@@ -1,28 +1,32 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { addEvent, completeEvent, setVisibilityFilter, VisibilityFilters } from './actions'
+import { addEvent, completeEvent, fetchEvents, setVisibilityFilter, VisibilityFilters } from './actions'
 import EventStream from './components/EventStream'
 import EventTimeline from './components/EventTimeline'
 import AddEvent from './components/AddEvent'
 
 export default class App extends Component {
-  render() {
-    const { dispatch, visibleEvents, visibilityFilter } = this.props
-    return (
-      <div>
-        <AddEvent
-          onAddClick={event => dispatch(addEvent(event))} />
-        <EventTimeline
-          events={visibleEvents}
-          startHour={9}
-          endHour={19}
-          onEventClick={index => dispatch(completeEvent(index))} />
-        <EventStream
-          events={visibleEvents}
-          onEventClick={index => dispatch(completeEvent(index))} />
-      </div>
-    )
-  }
+    componentDidMount() {
+        const { dispatch, selectedReddit } = this.props
+        dispatch(fetchEvents())
+    }
+    render() {
+        const { dispatch, visibleEvents, visibilityFilter } = this.props
+        return (
+            <div>
+                <AddEvent
+                    onAddClick={event => dispatch(addEvent(event))} />
+                <EventTimeline
+                    events={visibleEvents}
+                    startHour={9}
+                    endHour={19}
+                    onEventClick={index => dispatch(completeEvent(index))} />
+                <EventStream
+                    events={visibleEvents}
+                    onEventClick={index => dispatch(completeEvent(index))} />
+            </div>
+        )
+    }
 }
 
 App.propTypes = {

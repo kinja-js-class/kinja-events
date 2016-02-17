@@ -4,6 +4,7 @@
 
 export const ADD_EVENT = 'ADD_EVENT'
 export const COMPLETE_EVENT = 'COMPLETE_EVENT'
+export const INSERT_EVENTS = 'INSERT_EVENTS'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 
 /*
@@ -35,4 +36,20 @@ export function completeEvent(event) {
 
 export function setVisibilityFilter(filter) {
   return { type: SET_VISIBILITY_FILTER, filter }
+}
+
+function insertEvents(json) {
+    return {
+        type: INSERT_EVENTS,
+        events: json
+    }
+}
+
+export function fetchEvents() {
+    return (dispatch, getState) => {
+        let url = 'http://localhost:3000/deploy'
+        return fetch(url, {mode: 'cors'})
+            .then(response => response.json())
+            .then(json => dispatch(insertEvents(json)))
+    }
 }

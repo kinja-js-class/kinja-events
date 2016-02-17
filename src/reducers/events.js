@@ -1,4 +1,4 @@
-import { ADD_EVENT, COMPLETE_EVENT } from '../actions'
+import { ADD_EVENT, INSERT_EVENTS, COMPLETE_EVENT } from '../actions'
 
 function changeEvent(state, action) {
   switch (action.type) {
@@ -35,6 +35,8 @@ export function events(state = [], action) {
       return state.map(t =>
         changeEvent(t, action)
       )
+    case INSERT_EVENTS:
+        return action.events
     default:
       return state
   }
