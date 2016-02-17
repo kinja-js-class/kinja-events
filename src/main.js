@@ -10,9 +10,7 @@ import DevTools from './components/DevTools'
 
 let mockDate = (timeStr) => parseInt(moment(timeStr, 'HH:mm').format('X'), 10)
 
-let initialEvents = []
-
-let store = createStore(eventApp, {events: initialEvents}, compose(applyMiddleware(thunk), DevTools.instrument()))
+let store = createStore(eventApp, compose(applyMiddleware(thunk), DevTools.instrument()))
 
 let rootElement = document.getElementById('root')
 render(

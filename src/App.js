@@ -11,19 +11,28 @@ export default class App extends Component {
         dispatch(fetchEvents())
     }
     render() {
-        const { dispatch, visibleEvents } = this.props
+        const { dispatch, visibleEvents, error, status } = this.props
         return (
             <div>
                 <AddEvent
                     onAddClick={event => dispatch(addEvent(event))} />
-                <EventTimeline
-                    events={visibleEvents}
-                    startHour={9}
-                    endHour={19}
-                    onEventClick={index => dispatch(completeEvent(index))} />
-                <EventStream
-                    events={visibleEvents}
-                    onEventClick={index => dispatch(completeEvent(index))} />
+                {status === 'ERROR' && error ?
+                    <span className="error">{error}</span>
+                    :
+                    status === 'LOADING' ?
+                        <span className="info">Loading events</span>
+                        :
+                        <div>
+                            <EventTimeline
+                                events={visibleEvents}
+                                startHour={9}
+                                endHour={19}
+                                onEventClick={index => dispatch(completeEvent(index))} />
+                            <EventStream
+                                events={visibleEvents}
+                                onEventClick={index => dispatch(completeEvent(index))} />
+                        </div>
+                }
             </div>
         )
     }
@@ -33,7 +42,9 @@ export default class App extends Component {
 // Note: use https://github.com/faassen/reselect for better performance.
 function select(state) {
     return {
-        visibleEvents: state.events
+        visibleEvents: state.events.list,
+        status: state.events.status,
+        error: state.events.error
     }
 }
 

@@ -8,6 +8,7 @@ var mockDate = function (timeStr) {
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  // throw "bam";
   res.json([
       {id: 1, text: 'kinja-mantle #6246 deploy', completed: true, severity: 'info', timestamp: mockDate('9:35')},
       {id: 2, text: 'kinja-mantle #6247 deploy failed', completed: false, severity: 'alert', timestamp: mockDate('11:35')},
