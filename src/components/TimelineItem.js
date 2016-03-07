@@ -18,8 +18,8 @@ export default class TimelineItem extends Component {
 }
 
 TimelineItem.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  widthPercentage: PropTypes.number.isRequired,
-  timestamp: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired
+	onClick: PropTypes.func.isRequired,
+	widthPercentage: PropTypes.number.isRequired,
+	timestamp: PropTypes.number.isRequired,
+	text: PropTypes.string.isRequired
 }

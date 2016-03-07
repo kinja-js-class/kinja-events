@@ -14,11 +14,11 @@ let store = createStore(eventApp, compose(applyMiddleware(thunk), DevTools.instr
 
 let rootElement = document.getElementById('root')
 render(
-  <Provider store={store}>
-    <div>
-        <DevTools />
-        <App />
-    </div>
-  </Provider>,
-  rootElement
+	<Provider store={store}>
+		<div>
+				<DevTools />
+				<App />
+		</div>
+	</Provider>,
+	rootElement
 )

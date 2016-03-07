@@ -4,11 +4,11 @@ import LogMonitor from 'redux-devtools-log-monitor'
 import DockMonitor from 'redux-devtools-dock-monitor'
 
 export default createDevTools(
-   <DockMonitor toggleVisibilityKey="ctrl-H"
-       defaultIsVisible={false}
-       defaultPosition={"right"}
-       defaultSize={0.2}
-       changePositionKey="W">
-       <LogMonitor />
-   </DockMonitor>
+	<DockMonitor toggleVisibilityKey="ctrl-H"
+		defaultIsVisible={false}
+		defaultPosition={"right"}
+		defaultSize={0.2}
+		changePositionKey="W">
+		<LogMonitor />
+	</DockMonitor>
 )
