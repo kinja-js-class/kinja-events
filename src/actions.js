@@ -2,17 +2,33 @@
  * action types
  */
 
+export const REPLACE_EVENTS = 'REPLACE_EVENTS'
 export const ADD_EVENT = 'ADD_EVENT'
 export const COMPLETE_EVENT = 'COMPLETE_EVENT'
 export const INSERT_EVENTS = 'INSERT_EVENTS'
-export const FETCH_REQUEST = 'FETCH_REQUEST'
-export const FETCH_FAILED = 'FETCH_FAILED'
 
 /*
  * action creators
  */
 
-let nextEventId = 0;
+import Firebase from 'firebase';
+
+function replaceEvents(events) {
+	return {
+		type: REPLACE_EVENTS,
+		events
+	}
+}
+
+export function listenToFirebase() {
+	return (dispatch, getState) => {
+		const { firebaseURL } = getState()
+		const firebase = new Firebase(firebaseURL)
+		firebase.child('events').on('value', (snapshot) => {
+			dispatch(replaceEvents(snapshot.val()));
+		})
+	}
+}
 
 export function addEvent(event) {
 	return {
@@ -21,10 +37,10 @@ export function addEvent(event) {
 	};
 }
 
-export function completeEvent(event) {
+export function completeEvent(id) {
 	return {
 		type: COMPLETE_EVENT,
-		id: event.id
+		id: id
 	}
 }
 
@@ -32,30 +48,5 @@ function insertEvents(json) {
 	return {
 		type: INSERT_EVENTS,
 		events: json
-	}
-}
-
-function fetchRequest() {
-	return {
-		type: 'FETCH_REQUEST'
-	}
-}
-
-function fetchFailed() {
-	return {
-		type: 'FETCH_FAILED',
-		message: 'CSAK'
-	}
-}
-
-export function fetchEvents() {
-	return (dispatch, getState) => {
-		dispatch(fetchRequest())
-		let url = 'http://localhost:3000/deploy'
-		let options = { mode: 'cors' }
-		return fetch(url, options)
-			.then(response => response.json())
-			.then(json => dispatch(insertEvents(json)))
-			.catch(() => dispatch(fetchFailed()))
 	}
 }

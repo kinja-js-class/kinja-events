@@ -19,5 +19,5 @@ Event.propTypes = {
 	onClick: PropTypes.func.isRequired,
 	text: PropTypes.string.isRequired,
 	completed: PropTypes.bool.isRequired,
-	timestamp: PropTypes.number.isRequired
+	timestamp: PropTypes.string.isRequired
 }

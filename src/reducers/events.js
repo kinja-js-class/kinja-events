@@ -1,7 +1,13 @@
 import {
-	ADD_EVENT, INSERT_EVENTS, COMPLETE_EVENT, FETCH_FAILED, FETCH_REQUEST
+	ADD_EVENT, INSERT_EVENTS, COMPLETE_EVENT, REPLACE_EVENTS
 }
 from '../actions'
+
+const initialState = {
+	list: {},
+	status: 'LOADING',
+	error: null
+}
 
 function changeEvent(state, action) {
 	switch (action.type) {
@@ -14,7 +20,7 @@ function changeEvent(state, action) {
 				severity: action.event.severity
 			}
 		case COMPLETE_EVENT:
-			if (state.id !== action.id) {
+			if (state !== action.id) {
 				return state
 			}
 
@@ -27,10 +33,11 @@ function changeEvent(state, action) {
 	}
 }
 
-let initialState = {
-	list: [],
-	status: 'LOADING',
-	error: null
+function loadedState(events) {
+	return Object.assign({}, initialState, {
+		status: 'LOADED',
+		list: events
+	})
 }
 
 export function events(state = initialState, action) {
@@ -48,36 +55,17 @@ export function events(state = initialState, action) {
 				{},
 				state,
 				{
-					list: state.list.map(t => changeEvent(t, action))
+					list: Object.keys(state.list).map(t => changeEvent(t, action))
 				}
 			)
 		case INSERT_EVENTS:
 			return Object.assign(
 				{},
 				state,
-				{
-					status: 'LOADED',
-					error: null,
-					list: action.events
-				}
+				loadedState(action.events)
 			)
-		case FETCH_REQUEST:
-			return Object.assign(
-				{},
-				state,
-				{
-					status: 'LOADING'
-				}
-			)
-		case FETCH_FAILED:
-			return Object.assign(
-				{},
-				state,
-				{
-					status: 'ERROR',
-					error: action.message
-				}
-			)
+		case REPLACE_EVENTS:
+			return Object.assign({}, loadedState(action.events))
 		default:
 			return state
 	}
