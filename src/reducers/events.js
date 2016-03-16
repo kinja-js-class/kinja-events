@@ -1,5 +1,5 @@
 import {
-	ADD_EVENT, INSERT_EVENTS, COMPLETE_EVENT, REPLACE_EVENTS
+	ADD_EVENT, INSERT_EVENTS, REPLACE_EVENTS
 }
 from '../actions'
 
@@ -9,27 +9,15 @@ const initialState = {
 	error: null
 }
 
-function changeEvent(state, action) {
-	switch (action.type) {
-		case ADD_EVENT:
-			return {
-				id: Math.floor(Math.random() * 1000),
-				text: action.event.text,
-				completed: action.event.completed,
-				timestamp: action.event.timestamp,
-				severity: action.event.severity
-			}
-		case COMPLETE_EVENT:
-			if (state !== action.id) {
-				return state
-			}
-
-			return {
-				...state,
-				completed: !state.completed
-			}
-		default:
-			return state
+function createEvent(newEvent) {
+	return {
+		id: Math.floor(Math.random() * 1000),
+		text: action.event.text,
+		completed: action.event.completed,
+		timestamp: action.event.timestamp,
+		severity: action.event.severity,
+		type: 'custom',
+		meta: {}
 	}
 }
 
@@ -47,15 +35,7 @@ export function events(state = initialState, action) {
 				{},
 				state,
 				{
-					list: [...state.list, changeEvent(undefined, action)]
-				}
-			)
-		case COMPLETE_EVENT:
-			return Object.assign(
-				{},
-				state,
-				{
-					list: Object.keys(state.list).map(t => changeEvent(t, action))
+					list: [...state.list, createEvent(undefined, action)]
 				}
 			)
 		case INSERT_EVENTS:
