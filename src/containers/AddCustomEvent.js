@@ -5,7 +5,7 @@ import { addEvent } from '../actions'
 import AddEvent from '../components/AddEvent'
 
 const mapStateToProps = (state) => {
-	return {}
+	return {...state}
 }
 
 const mapDispatchToProps = (dispatch) => {
