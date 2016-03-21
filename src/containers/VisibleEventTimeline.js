@@ -5,8 +5,13 @@ import { completeEvent } from '../actions'
 import EventTimeline from '../components/EventTimeline'
 
 const getVisibleEvents = (events) => {
-	// TODO: filter event.type
-	return {...events}
+	let newevents = Object.keys(events.list).reduce((acc, k) => {
+		if (events.list[k].type !== 'slack' || events.list[k].text.indexOf('~~changelog~~') !== -1) {
+			acc[k] = events.list[k]
+		}
+		return acc
+	}, {})
+	return {...Object.assign({}, events, {list: newevents})}
 }
 
 const mapStateToProps = (state) => {
