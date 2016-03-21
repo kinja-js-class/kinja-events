@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 
-let formatTime = (timestamp) => moment(timestamp, 'X').format('HH:mm')
+let formatTime = (timestamp) => moment.unix(timestamp).format('HH:mm')
 
 export default class TimelineItem extends Component {
 	render() {

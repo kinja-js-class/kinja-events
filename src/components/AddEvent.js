@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import moment from 'moment'
 
 export default class AddEvent extends Component {
 	render() {
@@ -10,26 +9,26 @@ export default class AddEvent extends Component {
 						<option value="info">info</option>
 						<option value="alert">alert</option>
 				</select>
-				<input type="text" ref="time" />
+				<input type="time" ref="time" />
 
-				<button onClick={(e) => this.handleClick(e)}>
+				<button onClick={event => this.handleClick(event)}>
 					Add
 				</button>
 			</div>
 		)
 	}
 
-	handleClick(e) {
-		const text = this.refs.text.value.trim();
-		const severity = this.refs.severity.value;
-		const timestamp = parseInt(moment(this.refs.time.value.trim(), 'HH:mm').format('X'), 10);
-		let event = {
+	handleClick() {
+		const text = this.refs.text.value.trim()
+		const severity = this.refs.severity.value
+		const timestamp = parseInt(this.refs.time.value.trim(), 10)
+
+		this.props.addEvent({
 			text,
 			severity,
-			timestamp,
-			completed: false
-		};
-		this.props.onAddClick(event);
+			timestamp
+		})
+
 		// cleanup
 		this.refs.text.value = '';
 		this.refs.time.value = '';
@@ -37,5 +36,5 @@ export default class AddEvent extends Component {
 }
 
 AddEvent.propTypes = {
-	onAddClick: PropTypes.func.isRequired
+	addEvent: PropTypes.func.isRequired
 }
