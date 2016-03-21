@@ -21,7 +21,7 @@ export default class AddEvent extends Component {
 	handleClick() {
 		const text = this.refs.text.value.trim()
 		const severity = this.refs.severity.value
-		const timestamp = this.refs.time.value.trim()
+		const timestamp = parseInt(this.refs.time.value.trim(), 10)
 
 		this.props.addEvent({
 			text,
