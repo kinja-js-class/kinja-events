@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import moment from 'moment'
 
 import { completeEvent } from '../actions'
 import EventTimeline from '../components/EventTimeline'
@@ -17,8 +16,8 @@ const getVisibleEvents = (events) => {
 const mapStateToProps = (state) => {
 	return {
 		events: getVisibleEvents(state.events),
-		startTime: parseInt(moment('08:00', 'HH:mm').format('X'), 10),
-		endTime: parseInt(moment('24:00', 'HH:mm').format('X'), 10)
+		startTime: state.paginator.startDate,
+		endTime: state.paginator.startDate + 3600 * 14
 	}
 }
 

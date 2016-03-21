@@ -4,6 +4,7 @@
 
 export const REPLACE_EVENTS = 'REPLACE_EVENTS'
 export const INSERT_EVENTS = 'INSERT_EVENTS'
+export const SET_STARTDATE = 'SET_STARTDATE'
 const DATA_FIELD = 'events'
 
 /*
@@ -14,11 +15,23 @@ import Firebase from 'firebase';
 
 export function listenToFirebase() {
 	return (dispatch, getState) => {
-		const { firebaseURL } = getState()
+		const { firebaseURL, paginator } = getState()
 		const firebase = new Firebase(firebaseURL)
-		firebase.child(DATA_FIELD).on('value', (snapshot) => {
-			dispatch({type: REPLACE_EVENTS, events: snapshot.val()});
-		})
+		firebase
+			.child(DATA_FIELD)
+			.orderByChild("timestamp")
+			.startAt(paginator.startDate)
+			.endAt(paginator.startDate + 3600 * 14)
+			.on('value', (snapshot) => {
+				dispatch({type: REPLACE_EVENTS, events: snapshot.val() || {}});
+			})
+	}
+}
+
+export function setStartDate(d) {
+	return {
+		type: SET_STARTDATE,
+		startDate: d
 	}
 }
 
