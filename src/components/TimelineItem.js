@@ -8,9 +8,17 @@ export default class TimelineItem extends Component {
 		const eventClass = `event__label event__severity-${this.props.severity} ${this.props.completed ? ' event-completed' : ''}`
 
 		return (
-			<div className="event" style={{width: this.props.widthPercentage + '%'}} onClick={this.props.onClick}>
+			<div className="event" onClick={this.props.onClick}>
 				<div className={eventClass}>
-					{formatTime(this.props.timestamp)}: {this.props.text}
+					<header>
+						<time>{formatTime(this.props.timestamp)}</time>
+						{(this.props.meta && this.props.meta.user_name) ?
+							<span>by @{this.props.meta.user_name}</span>
+							:
+							null
+						}
+					</header>
+					{this.props.text}
 				</div>
 			</div>
 		)
@@ -19,7 +27,6 @@ export default class TimelineItem extends Component {
 
 TimelineItem.propTypes = {
 	onClick: PropTypes.func.isRequired,
-	widthPercentage: PropTypes.number.isRequired,
 	timestamp: PropTypes.number.isRequired,
 	text: PropTypes.string.isRequired
 }

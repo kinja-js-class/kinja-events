@@ -35,7 +35,6 @@ export default class EventStream extends Component {
 								.map((eventID, eventindex) =>
 									<TimelineItem {...this.props.events.list[eventID]}
 											key={eventindex}
-											widthPercentage={100 / row.eventIDs.length}
 											onClick={() => this.props.onEventClick(eventID)} />
 									)
 							}

@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 export default class AddEvent extends Component {
 	render() {
 		return (
-			<div>
+			<div className="addevent">
 				<input type="text" ref="text" />
 				<select ref="severity">
 						<option value="info">info</option>
