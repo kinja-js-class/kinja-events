@@ -5,21 +5,19 @@ let formatTime = (timestamp) => moment.unix(timestamp).format('HH:mm')
 
 export default class TimelineItem extends Component {
 	render() {
-		const eventClass = `event__label event__severity-${this.props.severity} ${this.props.completed ? ' event-completed' : ''}`
+		const eventClass = `event event__severity-${this.props.severity} ${this.props.completed ? ' event-completed' : ''}`
 
 		return (
-			<div className="event" onClick={this.props.onClick}>
-				<div className={eventClass}>
-					<header>
-						<time>{formatTime(this.props.timestamp)}</time>
-						{(this.props.meta && this.props.meta.user_name) ?
-							<span>by @{this.props.meta.user_name}</span>
-							:
-							null
-						}
-					</header>
-					{this.props.text}
-				</div>
+			<div className={eventClass} onClick={this.props.onClick}>
+				<header>
+					<time>{formatTime(this.props.timestamp)}</time>
+					{(this.props.meta && this.props.meta.user_name) ?
+						<span>by @{this.props.meta.user_name}</span>
+						:
+						null
+					}
+				</header>
+				{this.props.text}
 			</div>
 		)
 	}
