@@ -9,11 +9,12 @@ import App from './App'
 import eventApp from './reducers'
 import DevTools from './components/DevTools'
 import { setFirebaseURL } from './actions/firebase'
-import { listenToFirebase } from './actions'
+import { listenToFirebase, setStartDate } from './actions'
 
 let mockDate = (timeStr) => parseInt(moment(timeStr, 'HH:mm').format('X'), 10)
 
 let store = createStore(eventApp, compose(applyMiddleware(thunk), DevTools.instrument()))
+store.dispatch(setStartDate(mockDate('9:00')))
 store.dispatch(setFirebaseURL('https://kinja-events.firebaseio.com/'))
 store.dispatch(listenToFirebase())
 
