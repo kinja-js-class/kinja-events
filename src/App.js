@@ -9,8 +9,10 @@ export default class App extends Component {
 	render() {
 		return (
 			<div>
-				<AddCustomEvent />
-				<Paginator />
+				<div className="topbar">
+					<Paginator />
+					<AddCustomEvent />
+				</div>
 				<VisibleEventTimeline />
 				<VisibleEventStream />
 			</div>

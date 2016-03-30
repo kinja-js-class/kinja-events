@@ -1,0 +1,25 @@
+.paginator {
+	display: flex;
+	align-items: center;
+}
+.paginator-button {
+	flex-grow: 1;
+	flex-basis: 25%;
+	padding: 3px;
+	margin: 3px;
+
+	background-color: #607D8B;
+	border: 1px solid #607D8B;
+	color: #CFD8DC;
+	text-align: center;
+	text-decoration: none;
+}
+.paginator-button:hover {
+	border: 1px solid #B6B6B6;
+}
+.paginator-currentdate {
+	flex-grow: 1;
+	flex-basis: 50%;
+	text-align: center;
+	font-size: 1.5em;
+}

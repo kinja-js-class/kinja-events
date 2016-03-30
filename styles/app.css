@@ -1,9 +1,28 @@
 body {
 	font-family: Verdana;
-	font-size: 0.8em;
+	font-size: 1.1em;
+	margin: 0;
+	border-top: 0.8rem solid #455A64;
 }
+
+
+.topbar {
+	background-color: #607D8B;
+	color: #fff;
+	box-shadow: 0px 3px 5px 0px #b6b6b6;
+	padding: 1em;
+}
+
+
+.addevent {
+
+}
+
+
 .eventstream {
-	float: left;
+	font-size: 1.2em;
+	max-height: 15em;
+	overflow-y: scroll;
 }
 li {
 	text-decoration: none;
@@ -17,27 +36,26 @@ li.completed {
 
 
 .timeline {
-	float: left;
 	list-style-type: none;
-	width: 455px;
-	padding: 0;
+	padding: 1em;
 	margin: 0;
 }
 .timeline li {
-	min-height: 2em;
-	border-bottom: 1px dotted #ddd;
+	min-height: 2.3em;
+	border-bottom: 1px dotted #b6b6b6;
 }
 .timeline__time {
 	position: absolute;
-	width: 49px;
-	line-height: 2em;
-	height: 2em;
+	width: 3.5em;
+	line-height: 2.3em;
+	height: 2.3em;
+	font-size: 1em;
 }
 .timeline__events {
 	display: inline-block;
-	min-height: 2em;
-	border-left: 1px solid #bbb;
-	margin-left: 50px;
+	min-height: 2.3em;
+	border-left: 1px solid #b6b6b6;
+	margin-left: 3.5em;
 }
 .event {
 	display: inline-block;
@@ -50,11 +68,12 @@ li.completed {
 }
 
 .event__severity-info {
-	background-color: #A3BE8C;
-	border-color: darkgreen;
+	background-color: #DCEDC8;
+	color: #212121;
+	border-color: #689F38;
 }
 .event__severity-alert {
-	background-color: #BF616A;
+	background-color: #FF5722;
 	border-color: darkred;
 	color: white;
 }
