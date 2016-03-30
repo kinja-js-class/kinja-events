@@ -21,7 +21,7 @@ export function listenToFirebase() {
 			.child(DATA_FIELD)
 			.orderByChild("timestamp")
 			.startAt(paginator.startDate)
-			.endAt(paginator.startDate + 3600 * 14)
+			.endAt(paginator.startDate + 3600 * 15)
 			.on('value', (snapshot) => {
 				dispatch({type: REPLACE_EVENTS, events: snapshot.val() || {}});
 			})

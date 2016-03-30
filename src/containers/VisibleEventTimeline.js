@@ -5,7 +5,8 @@ import EventTimeline from '../components/EventTimeline'
 
 const getVisibleEvents = (events) => {
 	let newevents = Object.keys(events.list).reduce((acc, k) => {
-		if (events.list[k].type !== 'slack' || events.list[k].text.indexOf('~~changelog~~') !== -1) {
+		if (events.list[k].type !== 'slack' || events.list[k].text.indexOf('/changelog') !== -1) {
+			events.list[k].text = events.list[k].text.replace('/changelog', '');
 			acc[k] = events.list[k]
 		}
 		return acc
@@ -17,7 +18,7 @@ const mapStateToProps = (state) => {
 	return {
 		events: getVisibleEvents(state.events),
 		startTime: state.paginator.startDate,
-		endTime: state.paginator.startDate + 3600 * 14
+		endTime: state.paginator.startDate + 3600 * 15
 	}
 }
 
